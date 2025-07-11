@@ -18,6 +18,8 @@ substractButton.addEventListener("click", () => {
   const num2 = parseInt(document.getElementById("num2").value);
   const operationResult = num1 - num2;
 
+  console.log("");
+
   result.innerHTML = operationResult;
 });
 
