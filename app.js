@@ -20,7 +20,7 @@ substractButton.addEventListener('click', ()=>{
 const num1=parseInt(document.getElementById('num1').value)
 const num2=parseInt(document.getElementById('num2').value)
 const operationResult=num1-num2
-
+console.log(num1)
 result.innerHTML=operationResult;
 })
 
