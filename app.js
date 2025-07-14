@@ -3,40 +3,46 @@ const substractButton = document.getElementById("substract");
 const multiplyButton = document.getElementById("multiply");
 const divideButton = document.getElementById("divide");
 
-const result = document.getElementById("result");
+const resultToDisplay = document.getElementById("resultToDisplay");
 
 addButton.addEventListener("click", () => {
-  const num1 = parseInt(document.getElementById("num1").value);
-  const num2 = parseInt(document.getElementById("num2").value);
-  const operationResult = num1 + num2;
-
-  result.innerHTML = operationResult;
+  doOperation("add");
 });
 
 substractButton.addEventListener("click", () => {
-  const num1 = parseInt(document.getElementById("num1").value);
-  const num2 = parseInt(document.getElementById("num2").value);
-  const operationResult = num1 - num2;
-
-  console.log("");
-
-  result.innerHTML = operationResult;
+  doOperation("substract");
 });
 
 multiplyButton.addEventListener("click", () => {
-  const num1 = parseInt(document.getElementById("num1").value);
-  const num2 = parseInt(document.getElementById("num2").value);
-  const operationResult = num1 * num2;
-
-  result.innerHTML = operationResult;
+  doOperation("multiply");
 });
 
 divideButton.addEventListener("click", () => {
+  doOperation("divide");
+});
+
+function doOperation(operation) {
   const num1 = parseInt(document.getElementById("num1").value);
   const num2 = parseInt(document.getElementById("num2").value);
-  const operationResult = num1 / num2;
+  let operationResult;
 
-  console.log("");
+  switch (operation) {
+    case "add":
+      operationResult = num1 + num2;
+      break;
 
-  result.innerHTML = operationResult;
-});
+    case "substract":
+      operationResult = num1 - num2;
+      break;
+
+    case "multiply":
+      operationResult = num1 * num2;
+      break;
+
+    case "divide":
+      operationResult = num1 / num2;
+      break;
+  }
+
+  resultToDisplay.innerHTML = operationResult;
+}
