@@ -1,5 +1,7 @@
+import { doAddOperation, doSubtractOperation, doMultiplyOperation, doDivideOperation } from './functions.js'
+
 const addButton = document.getElementById("add");
-const substractButton = document.getElementById("substract");
+const subtractButton = document.getElementById("subtract");
 const multiplyButton = document.getElementById("multiply");
 const divideButton = document.getElementById("divide");
 
@@ -9,8 +11,8 @@ addButton.addEventListener("click", () => {
   doOperation("add");
 });
 
-substractButton.addEventListener("click", () => {
-  doOperation("substract");
+subtractButton.addEventListener("click", () => {
+  doOperation("subtract");
 });
 
 multiplyButton.addEventListener("click", () => {
@@ -24,25 +26,48 @@ divideButton.addEventListener("click", () => {
 function doOperation(operation) {
   const num1 = parseInt(document.getElementById("num1").value);
   const num2 = parseInt(document.getElementById("num2").value);
+
+  if (Number.isNaN(num1) || Number.isNaN(num2)) {
+    document.getElementById("errorMessage").innerHTML =
+      "Valamelyik input mező üres!";
+    resetFields();
+  }
+
+  if (num2 === 0) {
+    document.getElementById("errorMessage").innerHTML =
+      "A nullával való osztásnak nincs értelme!";
+    resetFields();
+  }
+
   let operationResult;
 
   switch (operation) {
     case "add":
-      operationResult = num1 + num2;
+      operationResult = doAddOperation(num1, num2);
       break;
 
-    case "substract":
-      operationResult = num1 - num2;
+    case "subtract":
+      operationResult = doSubtractOperation(num1, num2);
       break;
 
     case "multiply":
-      operationResult = num1 * num2;
+      operationResult = doMultiplyOperation(num1, num2);
       break;
 
     case "divide":
-      operationResult = num1 / num2;
+      operationResult = doDivideOperation(num1, num2);
       break;
   }
 
   resultToDisplay.innerHTML = operationResult;
+  resetFields();
+}
+
+function resetFields() {
+  setTimeout(() => {
+    document.getElementById("num1").value = "";
+    document.getElementById("num2").value = "";
+    document.getElementById("errorMessage").innerHTML = "";
+    resultToDisplay.innerHTML = "";
+  }, 2000);
 }
